@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Security.Cryptography.X509Certificates;
 
 namespace HolidayCalculator
 {
@@ -14,7 +15,7 @@ namespace HolidayCalculator
         }
     }
     
-    public enum Month//FOR LATER
+    public enum Month
     {
         January = 1,
         February,
@@ -32,6 +33,11 @@ namespace HolidayCalculator
 
     public class HolidayCalculator
     {
+        public int FirstSunday(int _year, Month m)
+        {
+            DateTime day1 = new DateTime(_year, Convert.ToInt32(m), 1);
+            return (7 - Convert.ToInt32(day1.DayOfWeek));
+        }
         public List<DateTime> CalculateHolidays(int year)
         {
             //LATER ADD MONTH VARIABLE SO I CAN REUSE FUNCTIONS AND VARIABLES
@@ -54,38 +60,36 @@ namespace HolidayCalculator
             int lastMonInMay = lastSunInMay + 1;
             if (lastMonInMay > 31) { lastMonInMay -= week; }*/
 
-            //MEMORIAL DAY
-            DateTime firstDayOfMay = new (year, 5, 1);
-            int daysToMon = (7 - Convert.ToInt32(firstDayOfMay.DayOfWeek)) + 1;
-            if (daysToMon >= 7) { daysToMon -= 7; }
-            int daysAfterMonInMay = 31 - daysToMon;
-            int lastMonInMay = ((daysToMon + 1) + (daysAfterMonInMay -= (daysAfterMonInMay % 7)));
-            if (lastMonInMay > 31) { lastMonInMay -= 7; }
-
             //may has 31 days so for the last week in may substract daysToSun(without the +1) from 31
             //then divide by 7 which will tell you how many weeks there are in may starting from the first sunday
             //then you should add that many weeks of days to sunday to get the last sunday in may
 
-            DateTime MemorialDay = new (year, 5, lastMonInMay);//LATER REMOVE THIS LINE AND PUT DIRECTLY INTO holidays.Add()
 
-            // Console.WriteLine($"Memorial Day in {year} is: May {lastMonInMay}th!");//for testing memorial day
+            //MEMORIAL DAY
+            int daysToMon = FirstSunday(year, Month.May) + 1;
+            if (daysToMon >= 7) { daysToMon -= 7; }
+            int daysAfterMonInMay = 31 - daysToMon;
+            int lastMonInMay = ((daysToMon + 1) + (daysAfterMonInMay -= (daysAfterMonInMay % 7)));
+            if (lastMonInMay > 31) { lastMonInMay -= 7; }
+            
+            DateTime MemorialDay = new(year, 5, lastMonInMay);//LATER REMOVE THIS LINE AND PUT DIRECTLY INTO holidays.Add()
+
 
             //LABOR DAY
-            DateTime firstDayOfSeptember = new (year, 9, 1);
-            int daysToMon_ = (7 - Convert.ToInt32(firstDayOfSeptember.DayOfWeek)) + 1;
+            int daysToMon_ = FirstSunday(year, Month.September) + 1;
             if (daysToMon_ >= 7) { daysToMon_ -= 7; }
             int monday = daysToMon_ + 1;
             
             DateTime LaborDay = new (year, 9, monday);//LATER REMOVE THIS LINE AND PUT DIRECTLY INTO holidays.Add()
 
+
             //THANKSGIVING
-            DateTime firstDayOfNov = new (year, 11, 1);
-            int daysToThurs = (7 - Convert.ToInt32(firstDayOfNov.DayOfWeek)) + 4;
+            int daysToThurs = FirstSunday(year, Month.November) + 4;
             if (daysToThurs >= 7) { daysToThurs -= 7; }
             int thursday = daysToThurs + 1;
-            int fourthThursInNov = thursday + 21;
+            int fourthThursInNovember = thursday + 21;
 
-            DateTime Thanksgiving = new (year, 11, fourthThursInNov);//LATER REMOVE THIS LINE AND PUT DIRECTLY INTO holidays.Add()
+            DateTime Thanksgiving = new (year, 11, fourthThursInNovember);//LATER REMOVE THIS LINE AND PUT DIRECTLY INTO holidays.Add()
 
 
 

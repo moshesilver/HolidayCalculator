@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Security.Cryptography.X509Certificates;
 
 namespace HolidayCalculator
 {
@@ -15,7 +14,7 @@ namespace HolidayCalculator
         }
     }
     
-    public enum Month
+    public enum Month //not used as of now
     {
         January = 1,
         February,
@@ -33,22 +32,15 @@ namespace HolidayCalculator
 
     public class HolidayCalculator
     {
-        public int FirstSunday(int _year, Month m)
+        public int FirstSunday(int _year, int month)
         {
-            DateTime day1 = new DateTime(_year, Convert.ToInt32(m), 1);
+            DateTime day1 = new(_year, month, 1);
             return (7 - Convert.ToInt32(day1.DayOfWeek));
         }
         public List<DateTime> CalculateHolidays(int year)
         {
-            //LATER ADD MONTH VARIABLE SO I CAN REUSE FUNCTIONS AND VARIABLES
             List<DateTime> holidays = new();
 
-
-
-
-            //replace 5 with 'month'
-            //replace May with 'Month'
-            //if ()initialize beforehand but empty
 
             /*int daysToSun = week - Convert.ToInt32(firstDayOfMay.DayOfWeek);
             if (daysToSun == week) { daysToSun = 0; }
@@ -66,54 +58,58 @@ namespace HolidayCalculator
 
 
             //MEMORIAL DAY
-            int daysToMon = FirstSunday(year, Month.May) + 1;
+            int daysToMon = FirstSunday(year, 5) + 1;
             if (daysToMon >= 7) { daysToMon -= 7; }
             int daysAfterMonInMay = 31 - daysToMon;
-            int lastMonInMay = ((daysToMon + 1) + (daysAfterMonInMay -= (daysAfterMonInMay % 7)));
-            if (lastMonInMay > 31) { lastMonInMay -= 7; }
-            
-            DateTime MemorialDay = new(year, 5, lastMonInMay);//LATER REMOVE THIS LINE AND PUT DIRECTLY INTO holidays.Add()
-
+            int memorialDay = ((daysToMon + 1) + (daysAfterMonInMay -= (daysAfterMonInMay % 7)));
+            if (memorialDay > 31) { memorialDay -= 7; }
+           
 
             //LABOR DAY
-            int daysToMon_ = FirstSunday(year, Month.September) + 1;
-            if (daysToMon_ >= 7) { daysToMon_ -= 7; }
-            int monday = daysToMon_ + 1;
-            
-            DateTime LaborDay = new (year, 9, monday);//LATER REMOVE THIS LINE AND PUT DIRECTLY INTO holidays.Add()
-
+            int _daysToMon = FirstSunday(year, 9) + 1;
+            if (_daysToMon >= 7) { _daysToMon -= 7; }
+            int laborDay = _daysToMon + 1;
+           
 
             //THANKSGIVING
-            int daysToThurs = FirstSunday(year, Month.November) + 4;
+            int daysToThurs = FirstSunday(year, 11) + 4;
             if (daysToThurs >= 7) { daysToThurs -= 7; }
             int thursday = daysToThurs + 1;
-            int fourthThursInNovember = thursday + 21;
-
-            DateTime Thanksgiving = new (year, 11, fourthThursInNovember);//LATER REMOVE THIS LINE AND PUT DIRECTLY INTO holidays.Add()
+            int thanksgiving = thursday + 21;
 
 
 
 
-            holidays.Add(MemorialDay);//Memorial Day
+            holidays.Add(new DateTime(year, 5, memorialDay));//Memorial Day
 
             holidays.Add(new DateTime(year, 7, 4));//Independence Day
 
-            holidays.Add(LaborDay);//Labor Day
+            holidays.Add(new DateTime(year, 9, laborDay));//Labor Day
 
-            holidays.Add(Thanksgiving);//Thanksgiving
+            holidays.Add(new DateTime(year, 11, thanksgiving));//Thanksgiving
 
-            holidays.Add(new DateTime(year, 12, 25));//Christmas Day
+            holidays.Add(new DateTime(year, 12, 25));//Christmas
 
-            holidays.Add(new DateTime((year + 1), 1, 1));//New Year's Day
+            holidays.Add(new DateTime((year + 1), 1, 1));//New Year's
+                                    //year starts on 1/5
             
-            
-
+            List<string> holidayNames = new()
+            {
+                "Memorial Day",
+                "Independence Day",
+                "Labor Day",
+                "Thanksgiving",
+                "Christmas",
+                "New Year's"
+            };
+            int i = 0;
             foreach (var holiday in holidays)
             {
-                Console.WriteLine(holiday.ToShortDateString());//LATER ADD ACCOMPANIED HOLIDAY NAMES IN LIST
+                Console.WriteLine($"{holidayNames[i]}: {holiday.ToShortDateString()}");//LATER ADD ACCOMPANIED HOLIDAY NAMES IN LIST
+                i++;
             }
 
-            return holidays;
+            return holidays;//these holidays include times (all of them are midnight)
         }
     }
 }

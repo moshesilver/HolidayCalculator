@@ -12,22 +12,15 @@ namespace HolidayCalculator
         {
             Console.WriteLine("Enter a year");
             int chosenYear = Convert.ToInt32(Console.ReadLine());
-            HolidayCalculator holidayCalculator = new(chosenYear);
-            List<DateTime> holidayOffDays = holidayCalculator.CalculateHolidayOffDays(holidayCalculator.Year);
+            OffDayCalculator offDayCalculator = new(chosenYear);
+            List<DateTime> holidayOffDays = offDayCalculator.CalculateHolidayOffDays(offDayCalculator.Year);
 
-            /*
-            int i = 0;
-            foreach (var holiday in holidays)
-            {
-                Console.WriteLine($"{holidayCalculator.holidayNames[i]}: {holiday.ToShortDateString()}");
-                i++;
-            }
-            */
+
             Console.WriteLine("Actual off days for each of the following holidays:");
             int i = 0;
             foreach (var offDay in holidayOffDays)
             {
-                Console.WriteLine($"{holidayCalculator.holidayNames[i]}: {offDay.ToShortDateString()}");
+                Console.WriteLine($"{offDayCalculator.holidayNames[i]}: {offDay.ToShortDateString()}");
                 i++;
             }
         }

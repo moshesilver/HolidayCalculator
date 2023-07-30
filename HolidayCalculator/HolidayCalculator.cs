@@ -1,8 +1,13 @@
-﻿namespace HolidayCalculator
+﻿using System;
+using HolidayCalculator;
+
+
+
+namespace HolidayCalculator
 {
-    public class HolidayCalculator
+    public class OffDayCalculator
     {
-        public HolidayCalculator(int Year)
+        public OffDayCalculator(int Year)
         {
             this.Year = Year;
         }

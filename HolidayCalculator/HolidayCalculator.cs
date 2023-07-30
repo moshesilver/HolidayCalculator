@@ -2,6 +2,47 @@
 {
     public class HolidayCalculator
     {
+        public HolidayCalculator(int Year)
+        {
+            this.Year = Year;
+        }
+        public int Year { get; set; }
+
+
+        private DateTime independenceOffDay;
+        private DateTime christmasOffDay;
+        private DateTime newYearsOffDay;
+
+
+        public DateTime MemorialOffDay { get; private set; }
+        public DateTime IndependenceOffDay
+        {
+            get { return independenceOffDay; }
+            private set { independenceOffDay = ActualOffDay(value); }
+        }
+        public DateTime LaborOffDay { get; private set; }
+        public DateTime ThanksgivingOffDay { get; private set; }
+        public DateTime ChristmasOffDay
+        {
+            get { return christmasOffDay; }
+            private set { christmasOffDay = ActualOffDay(value); }
+        }
+        public DateTime NewYearsOffDay
+        {
+            get { return newYearsOffDay; }
+            private set { newYearsOffDay = ActualOffDay(value); }
+        }
+
+
+        public DateTime ActualOffDay(DateTime holiday)
+        {
+            return holiday.DayOfWeek switch
+            {
+                DayOfWeek.Saturday => holiday.AddDays(-1),
+                DayOfWeek.Sunday => holiday.AddDays(1),
+                _ => holiday,
+            };
+        }
         public int FirstSundayOfMonth(int _year, int month)
         {
             DateTime day1 = new(_year, month, 1);
@@ -9,9 +50,9 @@
             if (firstSundayOfMonth >= 7) { firstSundayOfMonth -= 7; }
             return firstSundayOfMonth;
         }
-        public List<DateTime> CalculateHolidays(int year)
+        public List<DateTime> CalculateHolidayOffDays(int year)
         {
-            List<DateTime> holidays = new();
+            List<DateTime> holidayOffDays = new();
 
             /*int daysToSun = week - Convert.ToInt32(firstDayOfMay.DayOfWeek);
             if (daysToSun == week) { daysToSun = 0; }
@@ -32,7 +73,7 @@
             int firstMayMonday = FirstSundayOfMonth(year, 5) + 1;
             int daysAfterFirstMayMonday = 31 - firstMayMonday;
             int memorialDay = firstMayMonday + (daysAfterFirstMayMonday -= (daysAfterFirstMayMonday % 7));
-            
+
 
             //LABOR DAY (first monday in september)
             int laborDay = FirstSundayOfMonth(year, 9) + 1;
@@ -44,41 +85,30 @@
             int thanksgiving = firstNovemberThursday + 21;
 
 
+            MemorialOffDay = new DateTime(year, 5, memorialDay);
+            IndependenceOffDay = new DateTime(year, 7, 4);
+            LaborOffDay = new DateTime(year, 9, laborDay);
+            ThanksgivingOffDay = new DateTime(year, 11, thanksgiving);
+            ChristmasOffDay = new DateTime(year, 12, 25);
+            NewYearsOffDay = new DateTime((year + 1), 1, 1);
 
 
-            holidays.Add(new DateTime(year, 5, memorialDay));//Memorial Day
+            holidayOffDays.Add(MemorialOffDay);//Memorial Day
 
-            holidays.Add(new DateTime(year, 7, 4));//Independence Day
+            holidayOffDays.Add(IndependenceOffDay);//Independence Day
 
-            holidays.Add(new DateTime(year, 9, laborDay));//Labor Day
+            holidayOffDays.Add(LaborOffDay);//Labor Day
 
-            holidays.Add(new DateTime(year, 11, thanksgiving));//Thanksgiving
+            holidayOffDays.Add(ThanksgivingOffDay);//Thanksgiving
 
-            holidays.Add(new DateTime(year, 12, 25));//Christmas
+            holidayOffDays.Add(ChristmasOffDay);//Christmas
 
-            holidays.Add(new DateTime((year + 1), 1, 1));//New Year's
+            holidayOffDays.Add(NewYearsOffDay);//New Year's
 
 
-            List<DateTime> actualOffDays = new();
 
-            foreach (var holiday in holidays)
-            {
-                DateTime actualOffDay = new();
-                if (holiday.DayOfWeek == DayOfWeek.Saturday)
-                {
-                    actualOffDay = holiday.AddDays(-1);
-                }
-                else if (holiday.DayOfWeek == DayOfWeek.Sunday)
-                {
-                    actualOffDay = holiday.AddDays(1);
-                }
-                else { actualOffDay = holiday; }
 
-                actualOffDays.Add(actualOffDay);
-            }
-            
-
-            return actualOffDays;//these off days include times (all of them are midnight)
+            return holidayOffDays;//these off days include times (all of them are midnight)
         }
 
         public List<string> holidayNames = new()

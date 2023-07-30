@@ -10,10 +10,10 @@ namespace HolidayCalculator
     {
         static void Main(string[] args)
         {
-            HolidayCalculator holidayCalculator = new();
             Console.WriteLine("Enter a year");
             int chosenYear = Convert.ToInt32(Console.ReadLine());
-            List<DateTime> actualOffDays = holidayCalculator.CalculateHolidays(chosenYear);
+            HolidayCalculator holidayCalculator = new(chosenYear);
+            List<DateTime> holidayOffDays = holidayCalculator.CalculateHolidayOffDays(holidayCalculator.Year);
 
             /*
             int i = 0;
@@ -25,7 +25,7 @@ namespace HolidayCalculator
             */
             Console.WriteLine("Actual off days for each of the following holidays:");
             int i = 0;
-            foreach (var offDay in actualOffDays)
+            foreach (var offDay in holidayOffDays)
             {
                 Console.WriteLine($"{holidayCalculator.holidayNames[i]}: {offDay.ToShortDateString()}");
                 i++;

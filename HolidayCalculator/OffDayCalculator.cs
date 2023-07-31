@@ -45,14 +45,14 @@ namespace HolidayCalculator
                 _ => holiday,
             };
         }
-        public int FirstSundayOfMonth(int _year, int month)
+        public int FirstSundayOfMonth(int month)
         {
-            DateTime day1 = new(_year, month, 1);
+            DateTime day1 = new(Year, month, 1);
             int firstSundayOfMonth = ((7 - Convert.ToInt32(day1.DayOfWeek)) + 1);
             if (firstSundayOfMonth >= 7) { firstSundayOfMonth -= 7; }
             return firstSundayOfMonth;
         }
-        public List<DateTime> CalculateHolidayOffDays(int year)
+        public List<DateTime> CalculateHolidayOffDays()
         {
             List<DateTime> holidayOffDays = new();
 
@@ -72,27 +72,27 @@ namespace HolidayCalculator
 
 
             //MEMORIAL DAY (last monday in may)
-            int firstMayMonday = FirstSundayOfMonth(year, 5) + 1;
+            int firstMayMonday = FirstSundayOfMonth(5) + 1;
             int daysAfterFirstMayMonday = 31 - firstMayMonday;
             int memorialDay = firstMayMonday + (daysAfterFirstMayMonday -= (daysAfterFirstMayMonday % 7));
 
 
             //LABOR DAY (first monday in september)
-            int laborDay = FirstSundayOfMonth(year, 9) + 1;
+            int laborDay = FirstSundayOfMonth(9) + 1;
             if (laborDay > 7) { laborDay -= 7; }
 
             //THANKSGIVING (fourth thursday in november)
-            int firstNovemberThursday = FirstSundayOfMonth(year, 11) + 4;
+            int firstNovemberThursday = FirstSundayOfMonth(11) + 4;
             if (firstNovemberThursday > 7) { firstNovemberThursday -= 7; }
             int thanksgiving = firstNovemberThursday + 21;
 
 
-            MemorialOffDay = new DateTime(year, 5, memorialDay);
-            IndependenceOffDay = new DateTime(year, 7, 4);
-            LaborOffDay = new DateTime(year, 9, laborDay);
-            ThanksgivingOffDay = new DateTime(year, 11, thanksgiving);
-            ChristmasOffDay = new DateTime(year, 12, 25);
-            NewYearsOffDay = new DateTime((year + 1), 1, 1);
+            MemorialOffDay = new DateTime(Year, 5, memorialDay);
+            IndependenceOffDay = new DateTime(Year, 7, 4);
+            LaborOffDay = new DateTime(Year, 9, laborDay);
+            ThanksgivingOffDay = new DateTime(Year, 11, thanksgiving);
+            ChristmasOffDay = new DateTime(Year, 12, 25);
+            NewYearsOffDay = new DateTime((Year + 1), 1, 1);
 
 
             holidayOffDays.Add(MemorialOffDay);//Memorial Day

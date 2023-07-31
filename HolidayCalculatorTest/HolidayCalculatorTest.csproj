@@ -24,7 +24,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\HolidayCalculator\HolidayCalculator.csproj" />
-    <ProjectReference Include="..\UnitTest2021\UnitTest2021.csproj" />
   </ItemGroup>
 
 </Project>

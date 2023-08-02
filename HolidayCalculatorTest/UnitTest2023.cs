@@ -5,97 +5,131 @@ using Xunit;
 
 namespace OffDayCalculatorTest
 {
-    public class CalculateHolidayOffDaysTest
+    public class OffDayCalculator2023Test 
     {
-        OffDayCalculator testCase2023;
-        OffDayCalculator testCase2021;
+        OffDayCalculator testCase;
+        int testYear = 2023; //for later if possible to combine tests
 
-        public CalculateHolidayOffDaysTest()
+        public OffDayCalculator2023Test()
         {
             //setup the test
-            testCase2023 = new OffDayCalculator(2023);
-            testCase2023.CalculateHolidayOffDays();
-            testCase2021 = new OffDayCalculator(2021);
-            testCase2021.CalculateHolidayOffDays();
+            testCase = new OffDayCalculator(testYear);
+            testCase.CalculateHolidayOffDays();
         }
 
         [Fact]
         public void TestMemorialOffDay()
         {
             //Arrange
-            DateTime expected23 = new(2023, 5, 29);
-            DateTime expected21 = new(2021, 5, 31);
+            DateTime expected = new (testYear, 5, 29);
             //Act
-            DateTime actual23 = testCase2023.MemorialOffDay;
-            DateTime actual21 = testCase2021.MemorialOffDay;
+            DateTime actual = testCase.MemorialOffDay;
             //Assert
-            Assert.Equal(expected23, actual23);
-            Assert.Equal(expected21, actual21);
+            Assert.Equal(expected, actual);
         }
         [Fact]
         public void TestIndependenceOffDay()
         {
             //Arange
-            DateTime expected23 = new (2023, 7, 4);
-            DateTime expected21 = new(2021, 7, 5);
+            DateTime expected = new (testYear, 7, 4);
             //Act
-            DateTime actual23 = testCase2023.IndependenceOffDay;
-            DateTime actual21 = testCase2021.IndependenceOffDay;
+            DateTime actual = testCase.IndependenceOffDay;
             //Assert
-            Assert.Equal(expected23, actual23);
-            Assert.Equal(expected21, actual21);
+            Assert.Equal(expected, actual);
         }
         [Fact]
         public void TestLaborOffDay()
         {
             //Arange
-            DateTime expected23 = new (2023, 9, 4);
-            DateTime expected21 = new(2021, 9, 6);
+            DateTime expected = new (testYear, 9, 4);
             //Act
-            DateTime actual23 = testCase2023.LaborOffDay;
-            DateTime actual21 = testCase2021.LaborOffDay;
+            DateTime actual = testCase.LaborOffDay;
             //Assert
-            Assert.Equal(expected23, actual23);
-            Assert.Equal(expected21, actual21);
+            Assert.Equal(expected, actual);
         }
         [Fact]
         public void TestThanksgivingOffDay()
         {
             //Arange
-            DateTime expected23 = new(2023, 11,23);
-            DateTime expected21 = new(2021, 11, 25);
+            DateTime expected = new(testYear, 11,23);
             //Act
-            DateTime actual23 = testCase2023.ThanksgivingOffDay;
-            DateTime actual21 = testCase2021.ThanksgivingOffDay;
+            DateTime actual = testCase.ThanksgivingOffDay;
             //Assert
-            Assert.Equal(expected23, actual23);
-            Assert.Equal(expected21, actual21);
+            Assert.Equal(expected, actual);
         }
         [Fact]
         public void TestChristmasOffDay()
         {
             //Arange
-            DateTime expected23 = new(2023, 12, 25);
-            DateTime expected21 = new(2021, 12, 24);
+            DateTime expected = new(testYear, 12, 25);
             //Act
-            DateTime actual23 = testCase2023.ChristmasOffDay;
-            DateTime actual21 = testCase2021.ChristmasOffDay;
+            DateTime actual = testCase.ChristmasOffDay;
             //Assert
-            Assert.Equal(expected23, actual23);
-            Assert.Equal(expected21, actual21);
+            Assert.Equal(expected, actual);
         }
         [Fact]
         public void TestNewYearsOffDay()
         {
             //Arange
-            DateTime expected23 = new(2024, 1, 1);
-            DateTime expected21 = new(2021, 12, 31);
+            DateTime expected = new(testYear + 1, 1, 1);
             //Act
-            DateTime actual23 = testCase2023.NewYearsOffDay;
-            DateTime actual21 = testCase2021.NewYearsOffDay;
+            DateTime actual = testCase.NewYearsOffDay;
             //Assert
-            Assert.Equal(expected23, actual23);
-            Assert.Equal(expected21, actual21);
+            Assert.Equal(expected, actual);
+        }
+    }
+    public class OffDayCalculator2021Test
+    {
+        OffDayCalculator testCase;
+        int testYear = 2021;//for later if possible to combine tests
+
+        public OffDayCalculator2021Test()
+        {
+            testCase = new OffDayCalculator(testYear);
+            testCase.CalculateHolidayOffDays();
+        }
+
+        [Fact]
+        public void TestMemorialOffDay()
+        {
+            DateTime expected = new(testYear, 5, 31);
+            DateTime actual = testCase.MemorialOffDay;
+            Assert.Equal(expected, actual);
+        }
+        [Fact]
+        public void TestIndependenceOffDay()
+        {
+            DateTime expected = new(testYear, 7, 5);
+            DateTime actual = testCase.IndependenceOffDay;
+            Assert.Equal(expected, actual);
+        }
+        [Fact]
+        public void TestLaborOffDay()
+        {
+            DateTime expected = new(testYear, 9, 6);
+            DateTime actual = testCase.LaborOffDay;
+            Assert.Equal(expected, actual);
+        }
+        [Fact]
+        public void TestThanksgivingOffDay()
+        {
+            DateTime expected = new(testYear, 11, 25);
+            DateTime actual = testCase.ThanksgivingOffDay;
+            Assert.Equal(expected, actual);
+        }
+        [Fact]
+        public void TestChristmasOffDay()
+        {
+            DateTime expected = new(testYear, 12, 24);
+            DateTime actual = testCase.ChristmasOffDay;
+            Assert.Equal(expected, actual);
+        }
+        [Fact]
+        public void TestNewYearsOffDay()
+        {
+            DateTime expected = new(testYear, 12, 31);
+            DateTime actual = testCase.NewYearsOffDay;
+            Assert.Equal(expected, actual);
         }
     }
 }

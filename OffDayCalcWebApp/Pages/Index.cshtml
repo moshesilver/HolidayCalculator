@@ -1,0 +1,31 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+</div>
+<body>
+    <form method="post">
+        <label for="userInput">Input a work year:</label>
+        <input type="number" id="userInput" name="userInput" min="1"/>
+        <button type="submit" id="submitButton">Submit</button>
+    </form>
+
+    
+    
+        <div>
+            Off Days For Each of the Following Holidays:
+            <ul>
+                @foreach (string offDay in Model.Result)
+                {
+                    <li>@offDay</li>
+                }
+
+            </ul>
+        </div>
+    
+</body>

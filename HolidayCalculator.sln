@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HolidayCalculator", "Holida
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HolidayCalculatorTest", "HolidayCalculatorTest\HolidayCalculatorTest.csproj", "{F889D0D4-DD3B-4F2A-A7EC-89674FD06BBA}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OffDayCalcWebApp", "OffDayCalcWebApp\OffDayCalcWebApp.csproj", "{30047B13-021B-40AA-BA91-F76D32DE2711}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F889D0D4-DD3B-4F2A-A7EC-89674FD06BBA}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F889D0D4-DD3B-4F2A-A7EC-89674FD06BBA}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F889D0D4-DD3B-4F2A-A7EC-89674FD06BBA}.Release|Any CPU.Build.0 = Release|Any CPU
+		{30047B13-021B-40AA-BA91-F76D32DE2711}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{30047B13-021B-40AA-BA91-F76D32DE2711}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{30047B13-021B-40AA-BA91-F76D32DE2711}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{30047B13-021B-40AA-BA91-F76D32DE2711}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

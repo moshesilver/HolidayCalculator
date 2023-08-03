@@ -5,8 +5,8 @@ namespace HolidayCalculator
     public class OffDayCalculator
     {
         public OffDayCalculator(int Year)
-        {
-            this.Year = Year;
+        { 
+        this.Year = Year;
         }
         public int Year { get; set; }
 
